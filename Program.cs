@@ -27,9 +27,13 @@ Directory.CreateDirectory(rutaDirectorio);
 Console.WriteLine();
 
 var rutaPadre = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos";
-var rutas = Directory.EnumerateDirectories(rutaPadre, "*", SearchOption.AllDirectories);
-//var rutas = Directory.EnumerateFiles(rutaPadre, "*.json", SearchOption.AllDirectories);
+//var rutas = Directory.EnumerateDirectories(rutaPadre, "*", SearchOption.AllDirectories);
+var rutas = Directory.EnumerateFiles(rutaPadre, "*", SearchOption.AllDirectories);
 
+
+/* Clase Path - Extraer nombre de un archivo */
 foreach (var ruta in rutas) {
-    Console.WriteLine($"Ruta: { ruta }");
+    var nombreArchivo = Path.GetFileName(ruta);
+    var extension = Path.GetExtension(ruta);
+    Console.WriteLine($"Archivo: { nombreArchivo }");
 }
