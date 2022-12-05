@@ -18,4 +18,18 @@ Console.WriteLine();
 
 foreach (var line in contenidoLineas) {
     Console.WriteLine(line);
-}  
+}
+
+/* Clase Directory - Creando un directorio */
+var rutaDirectorio = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos\Carpeta-Archivos";
+Directory.CreateDirectory(rutaDirectorio);
+
+Console.WriteLine();
+
+var rutaPadre = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos";
+var rutas = Directory.EnumerateDirectories(rutaPadre, "*", SearchOption.AllDirectories);
+//var rutas = Directory.EnumerateFiles(rutaPadre, "*.json", SearchOption.AllDirectories);
+
+foreach (var ruta in rutas) {
+    Console.WriteLine($"Ruta: { ruta }");
+}
