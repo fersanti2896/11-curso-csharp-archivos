@@ -1,5 +1,6 @@
 ﻿
 using Archivos.Clases;
+using System.Diagnostics;
 using System.Text;
 
 Console.WriteLine("¡TRABAJANDO CON ARCHIVOS!");
@@ -87,5 +88,34 @@ using (var sw = new StreamWriter(rutaPersonas2, append: false, Encoding.UTF8)) {
     sw.Write(stringBuilder.ToString());
 }
 
+/* StreamReader y Stopwatch */
+var rutaGeneracion = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos\numeros.csv";
 
+/* Creando el archivo */
+/* using (var sw = new StreamWriter(rutaGeneracion, append: false)) {
+    for (int i = 0; i < 10_000_000; i++) {
+        sw.WriteLine($"{ i },Persona { i },{i}.00");
+    }
+} */
+
+var reloj = new Stopwatch();
+reloj.Start();
+var primeraLinea = File.ReadAllLines(rutaGeneracion)[0];
+reloj.Stop();
+
+Console.WriteLine();
+Console.WriteLine($"Primera linea: { primeraLinea }");
+Console.WriteLine($"Duración de File.ReadAllLines: { reloj.ElapsedMilliseconds / 1000.0 } segundos.");
+
+var reloj2 = new Stopwatch();
+reloj.Start();
+string primeraLinea2;
+using (var sr = new StreamReader(rutaGeneracion)) { 
+    primeraLinea2 = sr.ReadLine();
+    reloj.Stop();
+}
+
+Console.WriteLine();
+Console.WriteLine($"Primera Linea: { primeraLinea2 }");
+Console.WriteLine($"Duración del StreamReader: { reloj2.ElapsedMilliseconds / 1000.0 } segundos.");
 
