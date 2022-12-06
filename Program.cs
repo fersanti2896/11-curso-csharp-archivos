@@ -1,4 +1,7 @@
 ﻿
+using Archivos.Clases;
+using System.Text;
+
 Console.WriteLine("¡TRABAJANDO CON ARCHIVOS!");
 
 var rutaOrigen = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos\ejemplo.txt";
@@ -47,5 +50,30 @@ using (var streamWriter = new StreamWriter(rutaStream, append: true)) {
     //streamWriter.Dispose();
 }
 
+/* Listado a archivo de texto */
+var rutaPersonas = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos\personas.txt";
+
+var personas = new List<Persona> { 
+    new Persona() { Id = 1, Nombre = "Fernando Nicolás", Salario = 15000 },
+    new Persona() { Id = 2, Nombre = "Luis Nicolás", Salario = 18000 },
+    new Persona() { Id = 3, Nombre = "Wendy Torres", Salario = 10000 },
+    new Persona() { Id = 4, Nombre = "Marisol Contreras", Salario = 12000 },
+    new Persona() { Id = 5, Nombre = "Maria Dae", Salario = 12000 },
+    new Persona() { Id = 6, Nombre = "Juan Perez", Salario = 13000 },
+};
+
+var stringBuilder = new StringBuilder();
+
+foreach (var persona in personas) {
+    var id = persona.Id.ToString().PadLeft(5, '0');
+    var nombre = persona.Nombre.PadLeft(20);
+    var salario = persona.Salario.ToString("N2").Replace(".", "").PadLeft(5, '0');
+
+    stringBuilder.AppendLine($"{ id }{ nombre }{ salario }");
+}
+
+using (var sw = new StreamWriter(rutaPersonas, append: false)) { 
+    sw.Write(stringBuilder.ToString());
+}
 
 
