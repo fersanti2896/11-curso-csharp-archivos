@@ -1,5 +1,6 @@
 ﻿
 using Archivos.Clases;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
 
@@ -118,4 +119,19 @@ using (var sr = new StreamReader(rutaGeneracion)) {
 Console.WriteLine();
 Console.WriteLine($"Primera Linea: { primeraLinea2 }");
 Console.WriteLine($"Duración del StreamReader: { reloj2.ElapsedMilliseconds / 1000.0 } segundos.");
+
+/* Serializando y Deserializando - Formato JSON */
+var rutaJson = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos\personas.json";
+
+var per = new Persona { Id = 1, Nombre = "Fernando Nicolás", Salario = 16400 };
+var json = JsonConvert.SerializeObject(per);
+
+using (var sw = new StreamWriter(rutaJson)) { 
+    sw.WriteLine(json);
+}
+
+var cont = File.ReadAllText(rutaJson);
+var perDeserializado = JsonConvert.DeserializeObject<Persona>(cont)!;
+
+Console.WriteLine($"Persona: { perDeserializado.Nombre }");
 
