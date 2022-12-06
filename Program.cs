@@ -64,7 +64,7 @@ var personas = new List<Persona> {
 
 var stringBuilder = new StringBuilder();
 
-foreach (var persona in personas) {
+/*foreach (var persona in personas) {
     var id = persona.Id.ToString().PadLeft(5, '0');
     var nombre = persona.Nombre.PadLeft(20);
     var salario = persona.Salario.ToString("N2").Replace(".", "").PadLeft(5, '0');
@@ -74,6 +74,18 @@ foreach (var persona in personas) {
 
 using (var sw = new StreamWriter(rutaPersonas, append: false)) { 
     sw.Write(stringBuilder.ToString());
+}*/
+
+/* Creando un CSV */
+var rutaPersonas2 = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos\personas.csv";
+
+foreach (var persona in personas) {
+    stringBuilder.AppendLine($"{ persona.Id },{ persona.Nombre },{ persona.Salario }");
 }
+
+using (var sw = new StreamWriter(rutaPersonas2, append: false, Encoding.UTF8)) {
+    sw.Write(stringBuilder.ToString());
+}
+
 
 
