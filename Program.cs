@@ -37,3 +37,15 @@ foreach (var ruta in rutas) {
     var extension = Path.GetExtension(ruta);
     Console.WriteLine($"Archivo: { nombreArchivo }");
 }
+
+/* StreamWriter - Escribiendo archivos */
+var rutaStream = @"C:\Users\josantiago\Documents\Cursos Udemy\Programando en C# de Principiante a Profesional\S11 - Trabajando con Archivos\stream-write.txt";
+using (var streamWriter = new StreamWriter(rutaStream, append: true)) {
+    streamWriter.WriteLine("Buenos días Fernando");
+    streamWriter.WriteLine("Este es un mensaje de prueba");
+    streamWriter.WriteLine($"La hora actual es: { DateTime.Now.ToString("hh:mm:ss") }");
+    //streamWriter.Dispose();
+}
+
+
+
